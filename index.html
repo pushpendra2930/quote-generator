@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Quote Generator</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Quote of the Day</h2>
+        <blockquote id="quaote">Loading..</blockquote>
+        <span id="author">Loading..</span>
+        <div>
+            <button onclick="getquote(api_key);">New Quote</button>
+            <button onclick="tweet()"> <img src="twitter.png">Tweet</button>
+        </div>
+    </div>
+
+    <script>
+        const quaote = document.getElementById('quaote');
+        const author = document.getElementById('author');
+        const api_key = "https://api.quotable.io/random";
+
+        async function getquote(key){
+            const result = await fetch(key);
+            var data = await result.json();
+
+            // console.log(data);
+            quaote.innerHTML = data.content;
+            author.innerHTML = data.author;  
+        }
+        getquote(api_key);
+        function tweet(){
+            window.open("https://twitter.com/intent/tweet?text=Hello%20world");
+        }
+    </script>
+
+</body>
+</html>
